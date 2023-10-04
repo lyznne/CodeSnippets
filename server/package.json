@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "server for my codeSnippets App",
   "type": "module",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon index.js"
   },
