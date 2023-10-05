@@ -1,3 +1,4 @@
+import Language from "../models/LangModel.js";
 import SnippetService from "../services/CodeSnippetServices.js";
 
 export const getAllCodeSnippets = async (req, res) => {
@@ -12,15 +13,27 @@ export const getAllCodeSnippets = async (req, res) => {
     }
 }
 
+
 export const createCodeSnippet = async (req, res) => {
     try {
-        const codeSnippet = await SnippetService.createCodeSnippet(req.body);
+        //   extract relevant properties from body 
+        const { title, description, code, languageName } = req.body;
+        // find the language 
+        const language = await Language.findOne({ languageName });
+
+        if (!language) {
+            console.log(`[-] Language not found ${language}`)
+            return res.status(404).json({ error: "Language not found " });
+
+        }
+        const codeSnippet = await SnippetService.createCodeSnippet({
+            title, description, code, language: language._id
+        });
         res.json({ data: codeSnippet, status: "success ✨ " });
 
     } catch (err) {
         res.status(500).json({ error: err.message })
-        console.log(`[-] Error in controller -: create codeSnippets ${err.message} 🐛`);
-
+        console.log(`[-] Error in controller -: create code snippet:: ${err.message} 🐛`);
     }
 }
 

@@ -1,5 +1,7 @@
 
+import mongoose from "mongoose";
 import LanguageService from "../services/LangServices.js";
+import Language from "../models/LangModel.js";
 
 export const getAllLanguages = async (req, res) => {
     try {
@@ -27,7 +29,20 @@ export const createLanguage = async (req, res) => {
 
 export const getLanguageById = async (req, res) => {
     try {
-        const language = await LanguageService.createLanguage(req.params.id);
+        const languageId = req.params.id;
+        console.log("language id:: ", languageId);
+
+        // validate if the provided id is a valid object 
+        if(!mongoose.Types.ObjectId.isValid(languageId)) {
+            return res.status(400).json({ error: "Invalid language ID" });
+        };
+
+        const language = await Language.findById(languageId);
+
+        if (!language) {
+            return res.status(404).json({ error: "Language not found" });
+        }
+
         res.json({ data: language, status: "success ✨ " });
     } catch (err) {
         res.status(500).json({ error: err.message })

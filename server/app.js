@@ -1,43 +1,35 @@
-import express  from "express";
-import cors from 'cors'
+import express from "express";
+import cors from 'cors';
 import mongoose from "mongoose";
-import router from "./routes/LangRoutes.js"
+import LanguageRouter from "./routes/LangRoutes.js";
+import SnippetRouter from "./routes/CodeSnippetsRoutes.js";
 
-const app = express()
-const dbUrl = 'mongodb://127.0.0.1:27017/codeSnippets'
 
-//app use 
-app.use(cors);
+const app = express();
+const dbUrl = 'mongodb://127.0.0.1:27017/codeSnippets';
+
+// Use cors middleware with default options
+app.use(cors());
+// Parse JSON requests
 app.use(express.json());
 
 
-app.get('/msg', (req, res) => {
-    console.log("hi")
-    res.send({ 'message' : 'successs'})
-})
 
-// connect to the database 
+// connect to the database
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-
 .then(() => {
-    console.log("[+] Database connection successful ✨✨ ");
+    console.log("[+] Database connection successful ✨✨");
 })
 .catch((error) => {
     console.log(`[-] Error connecting to DB ${error} 🐛`);
+});
 
-})
-
-
-// Routes 
-app.use("/langs", router)
-
+// Routes
+app.use('/langs', LanguageRouter);
+app.use('/snippets', SnippetRouter);
 
 
-export default app
-
-
-
-
+export default app;
