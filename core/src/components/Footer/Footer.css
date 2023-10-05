@@ -1,0 +1,48 @@
+footer {
+    /* background: lightslategrey; */
+}
+
+.footer {
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer .footer-links,
+.how-to-use,
+.add-snippet,
+.footer-me,
+.copyrights {
+    display: flex;
+    align-items: center;
+}
+
+.footer .footer-links {
+    place-self: flex-start;
+    gap: 2rem;
+}
+
+.footer .footer-links .icon {
+    margin-right: .5rem;
+}
+
+.footer .footer-links a {
+    color: #FFF;
+    font-size: 1.1em;
+    font-weight: 400;
+}
+
+.footer-me {
+    color: #626262;
+    font-size: 1.15rem;
+    margin-top: 1rem;
+    gap: .5rem;
+    align-items: flex-start;
+}
+
+footer .copyrights {
+    padding: .5rem 2rem;
+    background: rgba(176, 196, 222, 0.151);
+    gap: 1rem;
+}

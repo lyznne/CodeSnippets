@@ -1,0 +1,27 @@
+nav {
+    background: rgba(119, 136, 153, 0.1);
+    padding: 1rem 2rem;
+}
+
+.navbar,
+.navbar-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo img {
+    height: 35px;
+    width: 35px;
+
+}
+
+.navbar-items {
+    gap: .75rem;
+}
+
+.navbar-items a {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 1.3em;
+    font-weight: 500;
+}
